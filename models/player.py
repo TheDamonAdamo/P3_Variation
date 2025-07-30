@@ -1,58 +1,60 @@
-from datetime import datetime
+# commands/models/player.py
+"""
+Defines the Player class, representing a chess player within the context of a tournament.
+"""
+from dataclasses import dataclass, field
+import uuid
 
-
+@dataclass
 class Player:
-    """The player class holds all information related to a player"""
+    player_id: str
+    first_name: str
+    last_name: str
+    date_of_birth: str # YYYY-MM-DD format
+    elo_rating: int
+    tournament_points: float = 0.0
+    played_opponents: list[str] = field(default_factory=list) # List of player_ids
 
-    DATE_FORMAT = "%d-%m-%Y"
+    def __post_init__(self):
+        # Ensure player_id is unique if not provided (e.g., for new players)
+        if not self.player_id:
+            self.player_id = str(uuid.uuid4())
 
-    def __init__(self, name, email, chess_id, birthday):
-        if not name:
-            raise ValueError("Player name is required!")
+    def to_dict(self):
+        """Converts the Player object to a dictionary for JSON serialization."""
+        return {
+            "player_id": self.player_id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "date_of_birth": self.date_of_birth,
+            "elo_rating": self.elo_rating,
+            "tournament_points": self.tournament_points,
+            "played_opponents": self.played_opponents
+        }
 
-        self.name = name
-        self.email = email
-        self.chess_id = chess_id
-
-        # The class uses a private attribute for the birthdate (datetime format)
-        self._birthdate = None
-        # And a public one with a getter/setter for the birthday (str)
-        self.birthday = birthday
-
-    def __str__(self):
-        return f"<{self.name}>"
-
-    def __hash__(self):
-        """Returns the hash of the object - useful to use the instance as a key in a dictionary or in a set"""
-        return hash((self.name, self.email, self.chess_id, self.birthdate))
-
-    def __eq__(self, other):
-        """Required when __hash__ is defined"""
-        if type(other) is not type(self):
-            raise TypeError("'=' is not supported with type %s" % type(other))
-
-        return (self.name, self.email, self.chess_id, self.birthdate) == (
-            other.name,
-            other.email,
-            other.chess_id,
-            other.birthdate,
+    @classmethod
+    def from_dict(cls, data: dict):
+        """Creates a Player object from a dictionary."""
+        return cls(
+            player_id=data['player_id'],
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            date_of_birth=data['date_of_birth'],
+            elo_rating=data['elo_rating'],
+            tournament_points=data.get('tournament_points', 0.0),
+            played_opponents=data.get('played_opponents', [])
         )
 
-    @property
-    def birthday(self):
-        """Property to get the birthday (string) from the birthdate (datetime)"""
-        return self.birthdate.strftime(self.DATE_FORMAT)
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} (Elo: {self.elo_rating}, Points: {self.tournament_points})"
 
-    @birthday.setter
-    def birthday(self, value):
-        """Sets the birthdate (datetime) from a string"""
-        self.birthdate = datetime.strptime(value, self.DATE_FORMAT)
+    def __repr__(self):
+        return f"Player(id='{self.player_id}', name='{self.first_name} {self.last_name}')"
 
-    def serialize(self):
-        """Serialize the instance in a format compatible with JSON"""
+    def __eq__(self, other):
+        if not isinstance(other, Player):
+            return NotImplemented
+        return self.player_id == other.player_id
 
-        data = {attr: getattr(self, attr) for attr in ("name", "email", "chess_id")}
-        # We make sure to use the str representation of the date
-        # datetime is notnatively serializable in JSON
-        data["birthday"] = self.birthday
-        return data
+    def __hash__(self):
+        return hash(self.player_id)

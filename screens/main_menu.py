@@ -1,28 +1,53 @@
-from commands import ExitCmd, NoopCmd
+# screens/main_menu_screen.py
+"""
+This module defines the main menu screen for the entire application,
+allowing navigation to club management, player management, and tournament management.
+"""
+from .base import BaseScreen # Assuming screens/base.py provides a BaseScreen
 
-from .base_screen import BaseScreen
-
-
-class MainMenu(BaseScreen):
-    """Main menu screen"""
-
-    def __init__(self, clubs):
-        self.clubs = clubs
+class MainMenuScreen(BaseScreen):
+    """
+    Displays the main menu of the application and handles user navigation.
+    """
+    def __init__(self):
+        super().__init__()
 
     def display(self):
-        for idx, club in enumerate(self.clubs, 1):
-            print(idx, club.name)
+        """Displays the main menu options."""
+        print("\n--- Main Menu ---")
+        print("1. Manage Clubs")
+        print("2. Manage Players")
+        print("3. Manage Tournaments")
+        print("4. Exit")
+        return self.get_user_input("Enter your choice: ")
 
-    def get_command(self):
-        while True:
-            print("Type C to create a club or a club number to view/edit it.")
-            print("Type X to exit.")
-            value = self.input_string()
-            if value.isdigit():
-                value = int(value)
-                if value in range(1, len(self.clubs) + 1):
-                    return NoopCmd("club-view", club=self.clubs[value - 1])
-            elif value.upper() == "C":
-                return NoopCmd("club-create")
-            elif value.upper() == "X":
-                return ExitCmd()
+    @staticmethod
+    def display_tournament_menu():
+        """Displays the tournament-specific menu options."""
+        print("\n--- Tournament Management Menu ---")
+        print("1. Create New Tournament")
+        print("2. Load and Manage Existing Tournament")
+        print("3. Back to Main Menu")
+        return input("Enter your choice: ").strip()
+
+    @staticmethod
+    def display_club_menu():
+        """Placeholder for club menu display (assuming clubs.py will use this)"""
+        print("\n--- Club Management Menu ---")
+        print("1. Create Club")
+        print("2. List Clubs")
+        print("3. Manage Club Players")
+        print("4. Delete Club")
+        print("5. View Club")
+        print("6. Back to Main Menu")
+        return input("Enter your choice: ").strip()
+
+    @staticmethod
+    def display_player_menu():
+        """Placeholder for player menu display (assuming players.py will use this)"""
+        print("\n--- Player Management Menu ---")
+        print("1. Create Player")
+        print("2. List Players")
+        print("3. Update Player ELO") # Example
+        print("4. Back to Main Menu")
+        return input("Enter your choice: ").strip()
