@@ -23,7 +23,7 @@ class ManageTournamentScreen(BaseScreen):
 
         print("\n--- Select Tournament to Manage ---")
         for i, tournament in enumerate(tournaments):
-            print(f"{i + 1}. {tournament.name} ({tournament.location}) - Status: {tournament.status}")
+            print(f"{i + 1}. {tournament.name} ({tournament.venue}) - Completed: {tournament.completed}")
 
         while True:
             choice = input("Enter the number of the tournament, or 'b' to go back: ").strip().lower()

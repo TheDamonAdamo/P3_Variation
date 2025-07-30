@@ -25,7 +25,7 @@ def run_application():
     main_menu = MainMenu()
 
     while True:
-        choice = main_menu.display()
+        choice = main_menu.run()
 
         if choice == "1":
             print("\n--- Navigating to Club Management (Existing Functionality) ---")

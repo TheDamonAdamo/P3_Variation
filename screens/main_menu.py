@@ -1,9 +1,9 @@
-# screens/main_menu_screen.py
+# screens/main_menu.py
 """
 This module defines the main menu screen for the entire application,
 allowing navigation to club management, player management, and tournament management.
 """
-from .base_screen import BaseScreen # Assuming screens/base.py provides a BaseScreen
+from .base_screen import BaseScreen # Assuming screens/base_screens.py provides a BaseScreen
 
 class MainMenu(BaseScreen):
     """
@@ -19,7 +19,12 @@ class MainMenu(BaseScreen):
         print("2. Manage Players")
         print("3. Manage Tournaments")
         print("4. Exit")
-        return self.get_user_input("Enter your choice: ")
+        #return self.get_user_input("Enter your choice: ")
+
+
+    def get_command(self):
+        choice = self.input_string(prompt="Enter your choice", empty=True)
+        return choice
 
     @staticmethod
     def display_tournament_menu():
