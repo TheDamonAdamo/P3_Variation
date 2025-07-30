@@ -3,9 +3,9 @@
 This module defines the main menu screen for the entire application,
 allowing navigation to club management, player management, and tournament management.
 """
-from .base import BaseScreen # Assuming screens/base.py provides a BaseScreen
+from .base_screen import BaseScreen # Assuming screens/base.py provides a BaseScreen
 
-class MainMenuScreen(BaseScreen):
+class MainMenu(BaseScreen):
     """
     Displays the main menu of the application and handles user navigation.
     """

@@ -6,7 +6,7 @@ for club, player, and tournament management.
 """
 from models.data_manager import DataManager
 from commands.tournaments import TournamentController
-from screens.main_menu import MainMenuScreen
+from screens.main_menu import MainMenu
 
 
 # Import existing club and player command modules (if they exist and are to be used)
@@ -22,7 +22,7 @@ def run_application():
     # clubs_manager = ClubsManager(...)
     # players_manager = PlayersManager(...)
 
-    main_menu = MainMenuScreen()
+    main_menu = MainMenu()
 
     while True:
         choice = main_menu.display()

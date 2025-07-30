@@ -2,7 +2,7 @@
 """
 Screen for collecting details to create a new tournament.
 """
-from ..base_screen import BaseScreen
+from screens.base_screen import BaseScreen
 import datetime
 
 

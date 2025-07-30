@@ -4,16 +4,16 @@ This module contains the core application logic (controller) for managing tourna
 It orchestrates interactions between screens (UI) and models (data structures and persistence).
 """
 
-from ..screens.tournaments.create_tournament import CreateTournamentScreen
-from ..screens.tournaments.manage_tournament import ManageTournamentScreen
-from ..screens.tournaments.register_player import RegisterPlayerScreen
-from ..screens.tournaments.advance_round import AdvanceRoundScreen
-from ..screens.tournaments.enter_results import EnterResultsScreen
-from ..screens.tournaments.tournament_report import TournamentReportScreen
-from ..screens.main_menu import MainMenuScreen
-from ..models.tournament import Tournament
-from ..models.player import Player
-from ..models.data_manager import DataManager
+from screens.tournaments.create_tournament import CreateTournamentScreen
+from screens.tournaments.manage_tournament import ManageTournamentScreen
+from screens.tournaments.register_player import RegisterPlayerScreen
+from screens.tournaments.advance_round import AdvanceRoundScreen
+from screens.tournaments.enter_results import EnterResultsScreen
+from screens.tournaments.tournament_report import TournamentReportScreen
+from screens.main_menu import MainMenu
+from models.tournament import Tournament
+from models.player import Player
+from models.data_manager import DataManager
 
 class TournamentController:
     """Manages the overall tournament application flow."""
@@ -25,7 +25,7 @@ class TournamentController:
     def run(self):
         """Main loop for tournament management."""
         while True:
-            choice = MainMenuScreen.display_tournament_menu() # Assume MainMenuScreen has this method
+            choice = MainMenu.display_tournament_menu() # Assume MainMenuScreen has this method
             if choice == "1":
                 self.create_new_tournament()
             elif choice == "2":

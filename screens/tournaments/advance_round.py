@@ -2,8 +2,8 @@
 """
 Screen for displaying matches of the current round when advancing.
 """
-from ..base import BaseScreen
-from ...commands.models.round import Round
+from screens.base_screen import BaseScreen
+from models.round import Round
 
 class AdvanceRoundScreen(BaseScreen):
     """

@@ -2,8 +2,8 @@
 """
 Screen for displaying detailed tournament reports.
 """
-from ..base import BaseScreen
-from ..models.tournament import Tournament
+from screens.base_screen import BaseScreen
+from models.tournament import Tournament
 
 
 class TournamentReportScreen(BaseScreen):

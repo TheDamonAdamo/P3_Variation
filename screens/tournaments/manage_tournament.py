@@ -2,7 +2,7 @@
 """
 Screen for managing an existing tournament (register players, advance rounds, enter results, view reports).
 """
-from ..base_screen import BaseScreen
+from screens.base_screen import BaseScreen
 from typing import List, Dict
 
 class ManageTournamentScreen(BaseScreen):

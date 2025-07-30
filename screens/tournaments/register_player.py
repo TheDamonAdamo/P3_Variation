@@ -2,7 +2,7 @@
 """
 Screen for registering players to a tournament.
 """
-from ..base import BaseScreen
+from screens.base_screen import BaseScreen
 from typing import List
 
 
